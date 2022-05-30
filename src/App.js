@@ -4,37 +4,43 @@ import axios from "axios";
 import PokemonCard from "./componenten/PokemonCard";
 
 function App() {
-    const [ selection, setSelection ] = useState([]);
-    const [ endpoint, setEndpoint ] = useState('https://pokeapi.co/api/v2/pokemon');
+    const [selection, setSelection] = useState([]);
+    const [endpoint, setEndpoint] = useState('https://pokeapi.co/api/v2/pokemon');
 
     useEffect(() => {
-        async function getSelection(){
+        async function getSelection() {
             try {
                 const result = await axios.get(`${endpoint}`);
                 setSelection(result.data);
-            } catch(e) {
+            } catch (e) {
                 console.error(e);
             }
         }
+
         getSelection();
     }, [endpoint]);
 
     return (
         <>
-            <button
-                type="button"
-                onClick={() => setEndpoint(selection.previous)}
-            >Previous</button>
-            <button
-                type="button"
-                onClick={() => setEndpoint(selection.next)}
-            >Next</button>
-            <div>
+            <div className="pokemon-selection">
                 {selection.results && selection.results.map((pokemon) => {
-                    return <PokemonCard name = {pokemon.name} key = {pokemon.name}/>
+                    return <PokemonCard name={pokemon.name} key={pokemon.name}/>
                 })}
             </div>
-
+            <div className="buttons">
+                <button
+                    type="button"
+                    disabled={!selection.previous}
+                    onClick={() => setEndpoint(selection.previous)}
+                >Previous
+                </button>
+                <button
+                    type="button"
+                    disabled={!selection.next}
+                    onClick={() => setEndpoint(selection.next)}
+                >Next
+                </button>
+            </div>
         </>
     );
 }

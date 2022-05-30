@@ -1,0 +1,29 @@
+h1 {
+    color: darkblue;
+    text-transform: capitalize;
+}
+
+.pokemon-selection {
+    background-color: yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 100px 75px;
+}
+
+.buttons {
+    background-color: yellow;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    border-radius: 5px;
+    color: yellow;
+    background-color: darkblue;
+    width: 100px;
+    margin: 5px;
+}
